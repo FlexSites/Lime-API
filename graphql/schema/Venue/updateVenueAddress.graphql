@@ -1,0 +1,15 @@
+extend type Mutation {
+  updateVenueAddress(input: UpdateVenueAddressInput): UpdateVenueAddressPayload
+}
+
+input UpdateVenueAddressInput {
+  clientMutationId: ID!
+  id: ID!
+  address: AddressInput!
+}
+
+type UpdateVenueAddressPayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+

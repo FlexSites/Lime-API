@@ -1,0 +1,13 @@
+extend type Mutation {
+  enableVenue(input: EnableVenueInput): EnableVenuePayload
+}
+
+input EnableVenueInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type EnableVenuePayload {
+  clientMutationId: ID!
+  venue: Venue!
+}

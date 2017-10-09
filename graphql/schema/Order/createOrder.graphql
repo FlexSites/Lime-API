@@ -1,0 +1,20 @@
+extend type Mutation {
+  createOrder(input: CreateOrderInput): CreateOrderPayload
+}
+
+input CreateOrderInput {
+  clientMutationId: ID!
+  items: [ OrderItemInput! ]
+  email: Email
+}
+
+input OrderItemInput {
+  sku: ID!
+  quantity: Int!
+}
+
+type CreateOrderPayload {
+  clientMutationId: ID!
+  user: User
+  order: Order
+}

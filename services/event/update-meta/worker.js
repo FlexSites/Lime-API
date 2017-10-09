@@ -2,14 +2,8 @@ const { toViewer } = require('@nerdsauce/auth')
 
 exports.worker = async (db, amqp) => {
   const collection = db.get('event_source')
-
-  const ex = amqp
-    .exchange('event', 'topic', { durable: true })
-
-  await ex
-    .queue('event.updateMeta.service', { durable: true })
-    .subscribe('updateMeta')
-    .each(async (msg) => {
+  amqp
+    .on('event.updateMeta', async (msg) => {
       console.log('updating event meta information')
       try {
         // const viewer = await toViewer(msg.properties.headers.authorization)
@@ -33,6 +27,7 @@ exports.worker = async (db, amqp) => {
         console.error(ex)
       }
     })
+    .listen()
 
   console.info('EVENT UPDATE_META SERVICE')
 }

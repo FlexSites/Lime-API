@@ -1,0 +1,13 @@
+extend type Mutation {
+  removeVenue(input: RemoveVenueInput): RemoveVenuePayload
+}
+
+input RemoveVenueInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type RemoveVenuePayload {
+  clientMutationId: ID!
+  venue: Venue!
+}

@@ -34,8 +34,7 @@ exports.worker = async (db, amqp) => {
         created.type = 'created'
         created.timestamp = Date.now()
 
-        await amqp.emit('event.created', created)
-        msg.ack()
+        return await amqp.emit('event.created', created)
       } catch (ex) {
         msg.nack()
         // TODO: Respond to client with error or nack()

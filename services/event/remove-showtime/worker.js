@@ -3,13 +3,8 @@ const { toViewer } = require('@nerdsauce/auth')
 exports.worker = async (db, amqp) => {
   const collection = db.get('event_source')
 
-  const ex = amqp
-    .exchange('event', 'topic', { durable: true })
-
-  await ex
-    .queue('event.removeShowtime.service', { durable: true })
-    .subscribe('removeShowtime')
-    .each(async (msg) => {
+  amqp
+    .on('event.removeShowtime', async (msg) => {
       console.log('removing showtime to event')
       try {
         // const viewer = await toViewer(msg.properties.headers.authorization)
@@ -33,6 +28,7 @@ exports.worker = async (db, amqp) => {
         console.error(ex)
       }
     })
+    .listen()
 
   console.info('EVENT REMOVE_SHOWTIME SERVICE')
 }

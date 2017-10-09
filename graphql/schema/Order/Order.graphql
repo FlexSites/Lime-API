@@ -1,0 +1,21 @@
+extend type Query {
+  orders: OrderConnection!
+}
+
+type Order implements Node {
+  id: ID!
+  user: User
+  created: DateTime
+  tickets: [ Ticket ]
+}
+
+# Pagination
+type OrderEdge implements Edge {
+  cursor: String!
+  node: Order!
+}
+
+type OrderConnection implements Connection {
+  edges: [ OrderEdge! ]!
+  pageInfo: PageInfo!
+}

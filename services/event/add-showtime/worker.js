@@ -3,9 +3,6 @@ const { toViewer } = require('@nerdsauce/auth')
 exports.worker = async (db, amqp) => {
   const collection = db.get('event_source')
 
-  const ex = amqp
-    .exchange('event', 'topic', { durable: true })
-
   amqp
     .on('event.addShowtime', async (msg) => {
       console.log('adding showtime to event')

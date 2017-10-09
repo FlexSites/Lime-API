@@ -1,0 +1,15 @@
+extend type Mutation {
+  updateVenueCapacity(input: UpdateVenueCapacityInput): UpdateVenueCapacityPayload
+}
+
+input UpdateVenueCapacityInput {
+  clientMutationId: ID!
+  id: ID!
+  capacity: Int!
+}
+
+type UpdateVenueCapacityPayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+

@@ -1,13 +1,9 @@
 const { toViewer } = require('@nerdsauce/auth')
 
 exports.worker = async (db, amqp) => {
-  const ex = amqp.exchange('event', 'topic', { durable: true })
   const collection = db.get('event_source')
-
-  ex
-    .queue('event.remove.service', { durable: true })
-    .subscribe('remove')
-    .each(async (msg) => {
+  amqp
+    .on('event.remove', async (msg) => {
       console.log('removing event')
       // Who's making the request?
       // const viewer = await toViewer(msg.properties.headers.authorization)
@@ -23,11 +19,12 @@ exports.worker = async (db, amqp) => {
       })
 
       // Alert interested parties about changes
-      await ex.publish({
+      return await ex.publish({
         type: 'removed',
         payload: msg.json(),
       }, { routingKey: 'removed', timestamp: msg.properties.timestamp })
     })
+    .listen()
 
   console.log('EVENT REMOVE SERVICE')
 }

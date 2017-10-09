@@ -5,7 +5,7 @@ exports.worker = async (db, amqp) => {
   console.log('stripe listening')
   amqp
     .on('event.created', async (msg) => {
-      console.log('STRIPE PAYLOAD')
+      console.log('STRIPE PAYLOAD', msg.fields.routingKey)
       const { payload } = msg.json()
       console.log('STRIPE', payload)
       // Create the product

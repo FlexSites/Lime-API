@@ -1,0 +1,15 @@
+extend type Mutation {
+  updateVenueMeta(input: UpdateVenueMetaInput): UpdateVenueMetaPayload
+}
+
+input UpdateVenueMetaInput {
+  clientMutationId: ID!
+  id: ID!
+  meta: MetaInput!
+}
+
+type UpdateVenueMetaPayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+

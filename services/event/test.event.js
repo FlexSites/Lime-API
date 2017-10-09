@@ -62,6 +62,9 @@ async function test() {
   const ex = client
     .exchange('event', 'topic', { durable: true })
 
+  const orders = client
+    .exchange('order', 'topic', { durable: true })
+
   const send = commit(ex)
 
 
@@ -184,6 +187,18 @@ async function test() {
       id,
     }, {
       routingKey: 'enable',
+      authorization,
+    })
+
+  await delay(1000)
+  await orders
+    .publish({
+      email: 'sethtippetts@gmail.com',
+      items: {
+        sku_BYD072cvCZL6aP: 2,
+      }
+    }, {
+      routingKey: 'create',
       authorization,
     })
 

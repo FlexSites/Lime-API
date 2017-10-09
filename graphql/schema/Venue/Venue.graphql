@@ -8,7 +8,7 @@ type Venue implements Node {
 
   meta: Meta!
   address: Address!
-
+  capacity: Int!
   status: STATUS
   events: [ Event ]
 }
@@ -22,6 +22,18 @@ type Address {
   postalCode: String!
   region: String!
   timezone: String!
+  latitude: Float
+  longitude: Float
+}
+
+input AddressInput {
+  address1: String!
+  address2: String
+  address3: String
+  locality: String!
+  postalCode: String!
+  region: String!
+  timezone: String
   latitude: Float
   longitude: Float
 }
