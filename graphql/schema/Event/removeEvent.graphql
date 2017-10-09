@@ -1,0 +1,13 @@
+extend type Mutation {
+  removeEvent(input: RemoveEventInput): RemoveEventPayload
+}
+
+input RemoveEventInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type RemoveEventPayload {
+  clientMutationId: ID!
+  event: Event!
+}

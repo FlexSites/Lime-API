@@ -1,0 +1,38 @@
+extend type Query {
+  venues: VenueConnection
+}
+
+# Everyone
+type Venue implements Node {
+  id: ID!
+
+  meta: Meta!
+  address: Address!
+
+  status: STATUS
+  events: [ Event ]
+}
+
+# Everyone
+type Address {
+  address1: String!
+  address2: String
+  address3: String
+  locality: String!
+  postalCode: String!
+  region: String!
+  timezone: String!
+  latitude: Float
+  longitude: Float
+}
+
+# Pagination
+type VenueEdge implements Edge {
+  cursor: String!
+  node: Venue!
+}
+
+type VenueConnection implements Connection {
+  edges: [ VenueEdge! ]!
+  pageInfo: PageInfo!
+}

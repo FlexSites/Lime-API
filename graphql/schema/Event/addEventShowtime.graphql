@@ -1,0 +1,16 @@
+extend type Mutation {
+  addEventShowtime(input: AddEventShowtimeInput): AddEventShowtimePayload
+}
+
+input AddEventShowtimeInput {
+  clientMutationId: ID!
+  id: ID!
+  timestamp: DateTime!
+  capacity: Int!
+}
+
+type AddEventShowtimePayload {
+  clientMutationId: ID!
+  showtime: Showtime!
+  event: Event!
+}

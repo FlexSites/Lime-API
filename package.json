@@ -1,0 +1,40 @@
+{
+  "name": "event-sourcing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "nf start",
+    "watch": "nodemon server.js",
+    "dynamodb": "dynalite --path ./tmp",
+    "mongodb": "mongod",
+    "rabbitmq": "rabbitmq-server",
+    "nf": "nf"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dynalite": "^1.2.0",
+    "faker": "^4.1.0",
+    "foreman": "^2.0.0",
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "@nerdsauce/amqp": "0.0.2",
+    "aws-sdk": "^2.124.0",
+    "config": "^1.26.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.5",
+    "express-graphql": "^0.6.11",
+    "glob": "^7.1.2",
+    "graphql": "^0.11.4",
+    "graphql-custom-types": "^1.1.0",
+    "graphql-relay": "^0.5.2",
+    "graphql-tools": "^1.2.3",
+    "monk": "^6.0.4",
+    "sqs-consumer": "^3.7.0",
+    "stripe": "^5.1.1"
+  }
+}

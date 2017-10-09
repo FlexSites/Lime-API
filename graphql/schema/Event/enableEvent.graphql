@@ -1,0 +1,13 @@
+extend type Mutation {
+  enableEvent(input: EnableEventInput): EnableEventPayload
+}
+
+input EnableEventInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type EnableEventPayload {
+  clientMutationId: ID!
+  event: Event!
+}

@@ -1,0 +1,15 @@
+extend type Mutation {
+  addEventMedia(input: AddEventMediaInput): AddEventMediaPayload
+}
+
+input AddEventMediaInput {
+  clientMutationId: ID!
+  id: ID!
+  url: Url!
+  type: String
+}
+
+type AddEventMediaPayload {
+  clientMutationId: ID!
+  event: Event!
+}

@@ -1,0 +1,47 @@
+extend type Query {
+  events: EventConnection
+}
+
+type Event implements Node, Page {
+  id: ID!
+
+  meta: Meta!
+  rating: RATING
+  range: EventRange
+
+  video: Url
+  image: Url
+
+  venue: Venue
+  showtimes: [ Showtime! ]
+}
+
+type EventRange {
+  start: DateTime
+  end: DateTime
+}
+
+type Showtime implements Node {
+  id: ID!
+  timestamp: DateTime
+  remaining: Int!
+  tickets(type: String): [Ticket]
+}
+
+# Pagination
+type EventEdge implements Edge {
+  cursor: String!
+  node: Event!
+}
+
+type EventConnection implements Connection {
+  edges: [ EventEdge! ]!
+  pageInfo: PageInfo!
+}
+
+# Enumerables
+enum RATING {
+  G
+  PG
+  PG13
+}

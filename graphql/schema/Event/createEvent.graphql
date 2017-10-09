@@ -1,0 +1,14 @@
+extend type Mutation {
+  createEvent(input: CreateEventInput): CreateEventPayload
+}
+
+input CreateEventInput {
+  clientMutationId: ID!
+  meta: MetaInput
+  venue_id: ID!
+}
+
+type CreateEventPayload {
+  clientMutationId: ID!
+  event: Event!
+}
