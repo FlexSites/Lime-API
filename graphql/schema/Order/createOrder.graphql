@@ -4,8 +4,14 @@ extend type Mutation {
 
 input CreateOrderInput {
   clientMutationId: ID!
+  payment: PaymentInput
   items: [ OrderItemInput! ]
   email: Email
+}
+
+input PaymentInput {
+  type: String!
+  source: String!
 }
 
 input OrderItemInput {

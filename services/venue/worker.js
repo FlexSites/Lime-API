@@ -77,5 +77,4 @@ exports.worker = async (db, amqp) => {
       const { id, payload } = msg.json()
       return read.update({ _id: id }, { $set: { enabled: false } })
     })
-    .listen()
 }

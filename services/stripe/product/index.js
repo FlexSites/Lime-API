@@ -1,4 +1,4 @@
-const PubSub = require('@nerdsauce/amqp/pubsub')
+const PubSub = require('@nerdsauce/amqp')
 const Monk = require('monk')
 
 const { worker } = require('./worker')

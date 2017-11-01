@@ -9,6 +9,8 @@ type Event implements Node, Page {
   rating: RATING
   range: EventRange
 
+  link: Url!
+
   video: Url
   image: Url
 

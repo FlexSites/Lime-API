@@ -1,0 +1,31 @@
+{
+  "name": "@nerdsauce/event-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "local": "nf start",
+    "start": "node index",
+    "watch": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nerdsauce/conduit": "0.0.1",
+    "@nerdsauce/event-add-media": "file:event.addMedia",
+    "@nerdsauce/event-add-showtime": "file:event.addShowtime",
+    "@nerdsauce/event-create": "file:event.create",
+    "@nerdsauce/event-disable": "file:event.disable",
+    "@nerdsauce/event-enable": "file:event.enable",
+    "@nerdsauce/event-query": "file:event.query",
+    "@nerdsauce/event-remove": "file:event.remove",
+    "@nerdsauce/event-remove-showtime": "file:event.removeShowtime",
+    "@nerdsauce/event-update-meta": "file:event.updateMeta",
+    "@nerdsauce/event.stripe": "file:event.stripe"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}

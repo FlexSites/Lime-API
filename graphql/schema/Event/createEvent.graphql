@@ -4,6 +4,7 @@ extend type Mutation {
 
 input CreateEventInput {
   clientMutationId: ID!
+  link: Url
   meta: MetaInput
   venue_id: ID!
 }

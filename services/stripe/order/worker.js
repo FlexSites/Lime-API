@@ -32,5 +32,4 @@ exports.worker = async (db, amqp) => {
         msg.ack()
       });
     })
-    .listen()
 }

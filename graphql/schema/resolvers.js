@@ -6,16 +6,21 @@ const {
   GraphQLDateTime,
   GraphQLLimitedString,
   GraphQLPassword,
-  GraphQLUUID,
+  GraphQLUUID
 } = require('graphql-custom-types')
 const uuid = require('uuid')
-const { commit } = require('../../commit')
 const Monk = require('monk')
-const stripe = require("stripe")(
-  "sk_test_dn38vHRQy67f3prQF1Anhm4T"
-);
-const AMQP = require('@nerdsauce/amqp/pubsub')
-const amqp = new AMQP(process.env.AMQP_URL, { name: 'graphql.service'})
+const stripe = require('stripe')(
+  'sk_test_dn38vHRQy67f3prQF1Anhm4T'
+)
+const Conduit = require('@nerdsauce/conduit')
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'graphql.service'})
+
+// conduit.middleware(context => next => (args, method) => {
+//   console.log('DEBUG:', method, args)
+//   return next(args, method)
+// })
+
 const db = new Monk(process.env.MONGODB_URL)
 
 const venueRead = db.get('venue.v1', { castIds: false })
@@ -39,26 +44,24 @@ const resolvers = {
       } catch (ex) {
         return 'Event'
       }
-    },
+    }
   },
   Query: {
     events: async (source, args, context, info) => {
-      console.time('stripe')
-      const { data } = await listProducts()
-      console.timeEnd('stripe')
-      console.log('products', data, data.map(product => ({ node: product })))
-
-      return { pageInfo: {}, edges: data.map(product => ({ node: product })) }
+      return conduit.action('event.query.v1', {})
+        .then((data) => {
+          return { pageInfo: {}, edges: data.map(product => ({ node: product })) }
+        })
     }
   },
   Event: {
-    id({ id, _id }) {
+    id ({ id, _id }) {
       return _id || id
     },
     meta: (source) => {
       return {
         title: source.name,
-        description: source.description,
+        description: source.description
       }
     },
     showtimes: async (source, args, context, info) => {
@@ -70,141 +73,140 @@ const resolvers = {
         return {
           id: showtime.id,
           timestamp: showtime.attributes.timestamp,
-          remaining: showtime.inventory.quantity,
+          remaining: showtime.inventory.quantity
         }
       })
-
     }
   },
   Order: {
-    id({ id, _id }) {
+    id ({ id, _id }) {
       return _id || id
     }
   },
   Venue: {
-    id({ id, _id }) {
+    id ({ id, _id }) {
       return _id || id
     }
   },
   Mutation: {
-    async createVenue(_, { input }) {
+    async createVenue (_, { input }) {
       const id = uuid.v4()
-      await amqp.emit('venue.create', {
+      await conduit.emit('venue.create', {
         id,
         process_id: input.clientMutationId,
         type: 'create',
         payload: input,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       })
       await delay(1000)
       const venue = await venueRead.findOne({ _id: id })
       console.log('venue', venue)
       return {
         clientMutationId: input.clientMutationId,
-        venue,
+        venue
       }
     },
-    async disableVenue(_, { input }, { viewer }) {
+    async disableVenue (_, { input }, { viewer }) {
       const id = uuid.v4()
-      await amqp.emit('venue.disable', {
+      await conduit.emit('venue.disable', {
         id,
         viewer_id: viewer.id,
         process_id: input.clientMutationId,
         type: 'create',
         payload: input,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       })
       await delay(1000)
       return {
         clientMutationId: input.clientMutationId,
-        venue: venueRead.findOne({ _id: id }),
+        venue: venueRead.findOne({ _id: id })
       }
     },
-    async enableVenue(_, { input }, { viewer }) {
+    async enableVenue (_, { input }, { viewer }) {
       const id = uuid.v4()
-      await amqp.emit('venue.enable', {
+      await conduit.emit('venue.enable', {
         id,
         viewer_id: viewer.id,
         process_id: input.clientMutationId,
         type: 'create',
         payload: input,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       })
       await delay(1000)
       return {
         clientMutationId: input.clientMutationId,
-        venue: venueRead.findOne({ _id: id }),
+        venue: venueRead.findOne({ _id: id })
       }
     },
-    async removeVenue(_, { input }, { viewer }) {
+    async removeVenue (_, { input }, { viewer }) {
       const id = uuid.v4()
-      await amqp.emit('venue.remove', {
+      await conduit.emit('venue.remove', {
         id,
         viewer_id: viewer.id,
         process_id: input.clientMutationId,
         type: 'create',
         payload: input,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       })
       await delay(1000)
       return {
         clientMutationId: input.clientMutationId,
-        venue: venueRead.findOne({ _id: id }),
+        venue: venueRead.findOne({ _id: id })
       }
     },
-    async updateVenueAddress(_, { input }, { viewer }) {
+    async updateVenueAddress (_, { input }, { viewer }) {
       const id = uuid.v4()
-      await amqp.emit('venue.updateAddress', {
+      await conduit.emit('venue.updateAddress', {
         id,
         viewer_id: viewer.id,
         process_id: input.clientMutationId,
         type: 'create',
         payload: input,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       })
       await delay(1000)
       return {
         clientMutationId: input.clientMutationId,
-        venue: venueRead.findOne({ _id: id }),
+        venue: venueRead.findOne({ _id: id })
       }
     },
-    async updateVenueMeta(_, { input }, { viewer }) {
+    async updateVenueMeta (_, { input }, { viewer }) {
       const id = uuid.v4()
-      await amqp.emit('venue.updateMeta', {
+      await conduit.emit('venue.updateMeta', {
         id,
         viewer_id: viewer.id,
         process_id: input.clientMutationId,
         type: 'create',
         payload: input,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       })
       await delay(1000)
       return {
         clientMutationId: input.clientMutationId,
-        venue: venueRead.findOne({ _id: id }),
+        venue: venueRead.findOne({ _id: id })
       }
     },
-    async updateVenueCapacity(_, { input }, { viewer }) {
+    async updateVenueCapacity (_, { input }, { viewer }) {
       const id = uuid.v4()
-      await amqp.emit('venue.enable', {
+      await conduit.emit('venue.enable', {
         id,
         viewer_id: viewer.id,
         process_id: input.clientMutationId,
         type: 'create',
         payload: input,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       })
       await delay(1000)
       return {
         clientMutationId: input.clientMutationId,
-        venue: venueRead.findOne({ _id: id }),
+        venue: venueRead.findOne({ _id: id })
       }
     },
-    async createOrder(_, { input }) {
+    async createOrder (_, { input }) {
       const id = uuid.v4()
       input.id = id
       console.log('CREATE ORDER', input)
-      await amqp.emit('order.create', {
+      await conduit.emit('order.create', {
         id,
         type: 'create',
         payload: input,
@@ -216,9 +218,9 @@ const resolvers = {
       console.log('ORDER RESULTS', order)
       return {
         order,
-        user: { id: 'seth', name: 'Seth Tippetts' },
+        user: { id: 'seth', name: 'Seth Tippetts' }
       }
-    },
+    }
     // createEvent(_, { input }, { commit }) {
     //   input.id = uuid.v4()
     //   return commit('event')('create')(input, {
@@ -265,7 +267,7 @@ const resolvers = {
   // Password: GraphQLPassword,
   // UUID: GraphQLUUID,
   Url: GraphQLURL,
-  Email: GraphQLEmail,
+  Email: GraphQLEmail
   // Query: {
   //   node: (source, args, { viewer }, info) => {
   //     const { type, id } = fromGlobalId(args.id)
@@ -315,7 +317,6 @@ const resolvers = {
 }
 
 module.exports = resolvers
-
 
 // const keyStructure = `:tenant/:type/:aggregate/:timestamp.json`
 

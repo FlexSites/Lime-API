@@ -1,0 +1,23 @@
+version: '3'
+services:
+  event.create:
+    build: services/event/create
+    env_file:
+      - .env
+    volumes:
+      - "/code"
+  web:
+    build: .
+    ports:
+     - "3000:3000"
+    depends_on:
+      - mongo
+      - rabbit
+    env_file:
+      - .env
+    volumes:
+      - "/code"
+  mongo:
+    image: "mongo:latest"
+  rabbit:
+    image: "rabbitmq:latest"
