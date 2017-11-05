@@ -15,3 +15,5 @@ An example message:
 ### Publishes
 
 This service publishes ...
+
+### Datastores
