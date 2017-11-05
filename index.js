@@ -1,5 +1,6 @@
 const PubSub = require('@nerdsauce/conduit')
 const Monk = require('monk')
+const uuid = require('uuid')
 
 // Services
 // const addMedia = require('@nerdsauce/event-add-media')
@@ -15,14 +16,19 @@ const eventStripe = require('@nerdsauce/event.stripe')
 console.log('STARTING', process.env.MONGODB_URL, process.env.AMQP_URL)
 
 const db = new Monk(process.env.MONGODB_URL)
-const logger = ({ message, queue, exchange, connection }) => next => (args, method) => {
-  console.log('GREAT LOGGING', method, args)
+const logger = (context) => next => (args, method) => {
+  const random = uuid.v4()
+  console.time(`${method}-${random}`)
   return next(args, method)
+    .then(results => {
+      console.timeEnd(`${method}-${random}`)
+      return results
+    })
 }
-const amqp = new PubSub(process.env.AMQP_URL)
+const amqp = new PubSub(process.env.AMQP_URL, { name: 'service.runner' })
+  .middleware(logger)
 
-
-async function start() {
+async function start () {
   // await addMedia.worker(db, amqp)
   // await addShowtime.worker(db, amqp)
   // await create.worker(db, amqp)
@@ -33,22 +39,6 @@ async function start() {
   // await remove.worker(db, amqp)
   // await removeShowtime.worker(db, amqp)
   // await updateMeta.worker(db, amqp)
-}
-
-class Worker extends PubSub {
-  constructor (name, { amqp, mongodb }) {
-    this.name = name
-    this.amqp = amqp
-    this.mongodb = mongodb
-  }
-
-  job(target, handler) {
-    super.on(target, (msg) => {
-
-    })
-
-    return
-  }
 }
 
 start()

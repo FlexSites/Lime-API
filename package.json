@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nerdsauce/conduit": "0.0.1",
+    "@nerdsauce/conduit": "0.1.0",
     "@nerdsauce/event-add-media": "file:event.addMedia",
     "@nerdsauce/event-add-showtime": "file:event.addShowtime",
     "@nerdsauce/event-create": "file:event.create",
