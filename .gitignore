@@ -8,3 +8,5 @@ tmp
 .env
 *.dump
 package-lock.json
+*.lock
+.npmrc

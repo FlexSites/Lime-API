@@ -15,7 +15,7 @@ module.exports = async () => {
   )
   const schema = makeExecutableSchema({
     typeDefs: idl,
-    resolvers,
+    resolvers
   })
 
   if (process.env.NODE_ENV === 'mock') {

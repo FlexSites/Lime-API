@@ -1,25 +1,11 @@
 const { fromGlobalId } = require('graphql-relay')
-const { promisify } = require('util')
 const {
   GraphQLEmail,
   GraphQLURL,
-  GraphQLDateTime,
-  GraphQLLimitedString,
-  GraphQLPassword,
-  GraphQLUUID
+  GraphQLDateTime
 } = require('graphql-custom-types')
 const uuid = require('uuid')
 const Monk = require('monk')
-const stripe = require('stripe')(
-  'sk_test_dn38vHRQy67f3prQF1Anhm4T'
-)
-const Conduit = require('@nerdsauce/conduit')
-const conduit = new Conduit(process.env.AMQP_URL, { name: 'graphql.service'})
-
-// conduit.middleware(context => next => (args, method) => {
-//   console.log('DEBUG:', method, args)
-//   return next(args, method)
-// })
 
 const db = new Monk(process.env.MONGODB_URL)
 
@@ -28,10 +14,6 @@ const venueRead = db.get('venue.v1', { castIds: false })
 const delay = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout))
 }
-
-const listProducts = promisify(stripe.products.list.bind(stripe.products))
-const listSkus = promisify(stripe.skus.list.bind(stripe.skus))
-const listOrders = promisify(stripe.orders.list.bind(stripe.orders))
 
 // const commitEvent = commit('event')
 
@@ -47,10 +29,20 @@ const resolvers = {
     }
   },
   Query: {
-    events: async (source, args, context, info) => {
-      return conduit.action('event.query.v1', {})
+    events: async (source, args, { conduit }, info) => {
+      console.log('start event query')
+      console.time('event.query.v1')
+      return conduit
+        .action('event.query.v1', {})
         .then((data) => {
+          console.timeEnd('event.query.v1')
           return { pageInfo: {}, edges: data.map(product => ({ node: product })) }
+        })
+    },
+    venues: async (source, args, { conduit }, info) => {
+      return conduit.action('venue.query.v1', {})
+        .then((venues) => {
+          return { pageInfo: {}, edges: venues.map(venue => ({ node: venue })) }
         })
     }
   },
@@ -89,24 +81,21 @@ const resolvers = {
     }
   },
   Mutation: {
-    async createVenue (_, { input }) {
-      const id = uuid.v4()
-      await conduit.emit('venue.create', {
-        id,
-        process_id: input.clientMutationId,
-        type: 'create',
-        payload: input,
-        timestamp: Date.now()
-      })
-      await delay(1000)
-      const venue = await venueRead.findOne({ _id: id })
-      console.log('venue', venue)
-      return {
-        clientMutationId: input.clientMutationId,
-        venue
-      }
+    async createVenue (_, { input }, { conduit }) {
+      const clientMutationId = input.clientMutationId
+      delete input.clientMutationId
+
+      input.id = uuid.v4()
+
+      return conduit.action('venue.create.v1', input)
+        .then((venue) => {
+          return {
+            clientMutationId,
+            venue
+          }
+        })
     },
-    async disableVenue (_, { input }, { viewer }) {
+    async disableVenue (_, { input }, { viewer, conduit }) {
       const id = uuid.v4()
       await conduit.emit('venue.disable', {
         id,
@@ -122,7 +111,7 @@ const resolvers = {
         venue: venueRead.findOne({ _id: id })
       }
     },
-    async enableVenue (_, { input }, { viewer }) {
+    async enableVenue (_, { input }, { viewer, conduit }) {
       const id = uuid.v4()
       await conduit.emit('venue.enable', {
         id,
@@ -138,7 +127,7 @@ const resolvers = {
         venue: venueRead.findOne({ _id: id })
       }
     },
-    async removeVenue (_, { input }, { viewer }) {
+    async removeVenue (_, { input }, { viewer, conduit }) {
       const id = uuid.v4()
       await conduit.emit('venue.remove', {
         id,
@@ -154,7 +143,7 @@ const resolvers = {
         venue: venueRead.findOne({ _id: id })
       }
     },
-    async updateVenueAddress (_, { input }, { viewer }) {
+    async updateVenueAddress (_, { input }, { viewer, conduit }) {
       const id = uuid.v4()
       await conduit.emit('venue.updateAddress', {
         id,
@@ -170,7 +159,7 @@ const resolvers = {
         venue: venueRead.findOne({ _id: id })
       }
     },
-    async updateVenueMeta (_, { input }, { viewer }) {
+    async updateVenueMeta (_, { input }, { viewer, conduit }) {
       const id = uuid.v4()
       await conduit.emit('venue.updateMeta', {
         id,
@@ -186,7 +175,7 @@ const resolvers = {
         venue: venueRead.findOne({ _id: id })
       }
     },
-    async updateVenueCapacity (_, { input }, { viewer }) {
+    async updateVenueCapacity (_, { input }, { viewer, conduit }) {
       const id = uuid.v4()
       await conduit.emit('venue.enable', {
         id,
@@ -202,7 +191,7 @@ const resolvers = {
         venue: venueRead.findOne({ _id: id })
       }
     },
-    async createOrder (_, { input }) {
+    async createOrder (_, { input }, { conduit }) {
       const id = uuid.v4()
       input.id = id
       console.log('CREATE ORDER', input)

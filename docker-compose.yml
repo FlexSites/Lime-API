@@ -1,23 +1,35 @@
 version: '3'
 services:
-  event.create:
-    build: services/event/create
+  event.query:
+    build: services/event.query
+    depends_on:
+      - mongo
     env_file:
       - .env
     volumes:
       - "/code"
-  web:
-    build: .
+  graphql.gateway:
+    build: services/graphql.gateway
     ports:
-     - "3000:3000"
+     - "5000:5000"
     depends_on:
+      - event.query
       - mongo
-      - rabbit
     env_file:
       - .env
     volumes:
       - "/code"
   mongo:
     image: "mongo:latest"
-  rabbit:
-    image: "rabbitmq:latest"
+    ports:
+      - "27017:27017"
+  # rabbit:
+  #   container_name: dev_rabbit
+  #   hostname: rabbit
+  #   image: rabbitmq:3.6.6-management
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER = guest
+  #     - RABBITMQ_DEFAULT_PASS = guest
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
