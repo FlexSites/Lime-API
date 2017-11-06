@@ -1,0 +1,5 @@
+type Ticket implements Node {
+  id: ID!
+  order: Order
+  type: String
+}

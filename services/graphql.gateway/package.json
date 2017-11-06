@@ -1,5 +1,5 @@
 {
-  "name": "event-sourcing",
+  "name": "@nerdsauce/graphql.gateway",
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
@@ -21,9 +21,6 @@
     "@nerdsauce/amqp": "0.0.2",
     "@nerdsauce/conduit": "^0.2.0",
     "auth0": "^2.8.0",
-    "aws-sdk": "^2.124.0",
-    "axios": "^0.17.0",
-    "config": "^1.26.2",
     "cors": "^2.8.4",
     "express": "^4.15.5",
     "express-graphql": "^0.6.11",
@@ -33,8 +30,6 @@
     "graphql-relay": "^0.5.2",
     "graphql-tools": "^1.2.3",
     "lodash.get": "^4.4.2",
-    "monk": "^6.0.4",
-    "sqs-consumer": "^3.7.0",
     "stripe": "^5.1.1"
   }
 }

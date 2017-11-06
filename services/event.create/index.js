@@ -1,9 +1,19 @@
-const AMQP = require('@nerdsauce/amqp')
+const Conduit = require('@nerdsauce/conduit')
 const Monk = require('monk')
+const get = require('lodash.get')
 
-const { worker } = require('./worker')
+const db = new Monk(process.env.MONGODB_URL)
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'event.create' })
 
-worker(new Monk(process.env.MONGODB_URL), new AMQP(process.env.AMQP_URL))
-  .catch((ex) => {
-    console.error('event.create startup error', ex)
+const collection = db.get('event_source')
+
+conduit
+  .reaction('event.create', async (msg, message) => {
+    const permissions = get(message, [ 'user', 'permissions' ], [])
+    if (!permissions.includes('create:event')) {
+      return new Error('Unauthorized. Must have permission to create events.')
+    }
+    return collection.insert(message)
   })
+
+console.info('event.create listening')

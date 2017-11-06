@@ -1,0 +1,9 @@
+scalar DateTime
+scalar Email
+scalar Url
+
+enum STATUS {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}

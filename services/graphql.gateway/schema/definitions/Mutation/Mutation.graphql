@@ -1,0 +1,15 @@
+type Mutation {
+  recordMetric(input: RecordMetricInput): RecordMetricPayload
+}
+
+input RecordMetricInput {
+  clientMutationId: ID!
+  key: String
+  value: String
+}
+
+type RecordMetricPayload {
+  clientMutationId: ID!
+  key: String
+  value: Float
+}

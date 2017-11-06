@@ -1,0 +1,15 @@
+type Meta {
+  title: String!
+  description: String
+  image: Url
+}
+
+input MetaInput {
+  title: String!
+  description: String
+  image: Url
+}
+
+interface Page {
+  meta: Meta!
+}

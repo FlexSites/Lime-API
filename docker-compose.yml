@@ -8,6 +8,16 @@ services:
       - .env
     volumes:
       - "/code"
+  event.create:
+    build:
+      context: ./services/event.create
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - mongo
+    env_file:
+      - .env
+    volumes:
+      - "/code"
   graphql.gateway:
     build: services/graphql.gateway
     ports:

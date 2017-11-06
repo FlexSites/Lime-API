@@ -4,8 +4,8 @@ WORKDIR /code
 # Install app dependencies
 COPY package.json .
 COPY .npmrc .
-RUN npm install --production
+RUN npm install
 RUN rm .npmrc
 # Bundle app source
 COPY . .
-CMD ["npm", "start"]
+CMD ["npm", "run", "watch"]
