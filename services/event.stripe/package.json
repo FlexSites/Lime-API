@@ -1,8 +1,8 @@
 {
   "name": "@nerdsauce/event.stripe",
   "version": "1.0.0",
-  "description": "",
-  "main": "worker.js",
+  "description": "Worker to keep Stripe Products in-sync with our data",
+  "main": "index.js",
   "scripts": {
     "start": "node index",
     "watch": "nodemon index",
@@ -12,9 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nerdsauce/amqp": "0.0.3",
-    "@nerdsauce/auth": "0.0.2",
-    "config": "^1.26.2",
+    "@nerdsauce/conduit": "0.2.0",
     "lodash.get": "^4.4.2",
     "monk": "^6.0.4"
   },

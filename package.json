@@ -15,6 +15,7 @@
   "dependencies": {
     "@nerdsauce/event.create": "file:./services/event.create",
     "@nerdsauce/event.query": "file:./services/event.query",
+    "@nerdsauce/event.stripe": "file:services/event.stripe",
     "@nerdsauce/graphql.gateway": "file:services/graphql.gateway",
     "dotenv": "^4.0.0"
   },
