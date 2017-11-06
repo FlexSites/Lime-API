@@ -19,7 +19,6 @@ const auth = new AuthenticationClient({
   domain: 'ticketing.auth0.com',
   clientId: 'D3QDBTxJhSqEmiSKRUJOk6SXSYfUUdp5'
 })
-const token = '-IV1cYdvDVfTaqsgSMWKvr_vLA38qkNJ'
 
 const schemaPromise = require('./schema')()
 
@@ -46,9 +45,12 @@ app.use(async (req, res, next) => {
     return next()
   }
   try {
+    const token = req.get('authorization')
+    if (!token) return next()
     console.time('auth')
-    const { sub } = await auth.getProfile(token)
+    const { sub } = await auth.getProfile(token.replace(/^Bearer\s/i, ''))
     const viewers = await manage.getUser(sub)
+    console.log(viewers[0].app_metadata.authorization)
     res.locals.viewer = get(viewers, ['0', 'app_metadata', 'authorization'], {})
     console.timeEnd('auth')
     next()

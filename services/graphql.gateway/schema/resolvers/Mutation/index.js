@@ -1,4 +1,4 @@
-const createEvent = require('./createEvent')
+const { createEvent } = require('./createEvent')
 
 module.exports = {
   Mutation: {

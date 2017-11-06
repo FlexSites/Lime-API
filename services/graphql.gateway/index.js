@@ -1,5 +1,5 @@
 const express = require('express')
-
+const { expressPlayground } = require('graphql-playground-middleware')
 const graphql = require('./graphql')
 
 const app = express()
@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
   res.redirect('/api/graphql', 302)
 })
 
+app.get('/api/graphql', expressPlayground({ endpoint: '/api/graphql' }))
 app.use('/api/graphql', graphql)
 
 app.listen(PORT, () => {
