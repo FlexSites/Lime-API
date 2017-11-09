@@ -1,10 +1,14 @@
 require('dotenv').load()
 
-// Services
+// Workers
 require('@nerdsauce/event.mongo')
+require('@nerdsauce/event.stripe')
+
+// Services
 require('@nerdsauce/event.create')
 require('@nerdsauce/event.query')
-require('@nerdsauce/event.stripe')
 require('@nerdsauce/venue.query')
 require('@nerdsauce/venue.create')
+
+// Gateway
 require('@nerdsauce/graphql.gateway')
