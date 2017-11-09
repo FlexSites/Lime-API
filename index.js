@@ -1,6 +1,7 @@
 require('dotenv').load()
 
 // Services
+require('@nerdsauce/event.mongo')
 require('@nerdsauce/event.create')
 require('@nerdsauce/event.query')
 require('@nerdsauce/event.stripe')
