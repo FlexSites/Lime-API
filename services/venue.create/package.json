@@ -1,0 +1,20 @@
+{
+  "name": "@nerdsauce/venue.create",
+  "version": "1.0.0",
+  "description": "",
+  "main": "worker.js",
+  "scripts": {
+    "start": "node index",
+    "watch": "nodemon index"
+  },
+  "keywords": [],
+  "author": "sethtippetts@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@nerdsauce/conduit": "0.2.1",
+    "monk": "^6.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
