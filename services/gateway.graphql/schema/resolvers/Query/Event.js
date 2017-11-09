@@ -11,11 +11,9 @@ exports.meta = (source) => {
 }
 
 exports.showtimes = async (source, args, context, info) => {
-  console.log('LISTING SKUS', source.id)
   const { data } = source.skus
 
   return data.map((showtime) => {
-    console.log('SHOWTIME', showtime)
     return {
       id: showtime.id,
       timestamp: showtime.attributes.timestamp,

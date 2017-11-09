@@ -2,18 +2,13 @@ const uuid = require('uuid')
 
 exports.createVenue = (source, { input }, { conduit }) => {
   const { clientMutationId } = input
-  console.log('venue.create.v1', input)
+  input.id = uuid.v4()
   return conduit
-    .action('venue.create.v1', { clientMutationId, id: uuid.v4() })
+    .action('venue.create.v1', input)
     .then(results => {
-      console.log('venue.created', results)
       return {
         clientMutationId,
         venue: results
       }
-    })
-    .catch((ex) => {
-      console.error('my horrible error!', ex)
-      throw ex
     })
 }

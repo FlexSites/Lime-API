@@ -40,7 +40,6 @@ const app = express()
 app.use(cors())
 // app.use(auth())
 app.use(async (req, res, next) => {
-  console.log(req.method)
   if (req.method !== 'POST') {
     return next()
   }
@@ -50,7 +49,6 @@ app.use(async (req, res, next) => {
     console.time('auth')
     const { sub } = await auth.getProfile(token.replace(/^Bearer\s/i, ''))
     const viewers = await manage.getUser(sub)
-    console.log(viewers[0].app_metadata.authorization)
     res.locals.viewer = get(viewers, ['0', 'app_metadata', 'authorization'], {})
     console.timeEnd('auth')
     next()
@@ -59,9 +57,7 @@ app.use(async (req, res, next) => {
   }
 })
 app.use(graphqlExpress(async (req, res) => {
-  console.log('reached graph')
   const schema = await schemaPromise
-  console.log('schema ready')
   return {
     schema,
     context: {

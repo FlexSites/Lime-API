@@ -2,6 +2,7 @@ require('dotenv').load()
 
 // Workers
 require('@nerdsauce/event.mongo')
+require('@nerdsauce/venue.mongo')
 require('@nerdsauce/event.stripe')
 
 // Services
