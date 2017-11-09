@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000
 //     console.error(ex)
 //   })
 app.get('/', (req, res) => {
-  res.redirect('/api/graphql', 302)
+  res.redirect(301, '/api/graphql')
 })
 
 app.get('/api/graphql', expressPlayground({ endpoint: '/api/graphql' }))
