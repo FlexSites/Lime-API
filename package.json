@@ -18,6 +18,7 @@
     "@nerdsauce/event.query": "file:./services/service.event.query",
     "@nerdsauce/event.stripe": "file:services/worker.event.stripe",
     "@nerdsauce/graphql.gateway": "file:services/gateway.graphql",
+    "@nerdsauce/service.event.disable": "file:services/service.event.disable",
     "@nerdsauce/service.venue.enable": "file:services/service.venue.enable",
     "@nerdsauce/service.venue.remove": "file:services/service.venue.remove",
     "@nerdsauce/service.venue.updateaddress": "file:services/service.venue.updateAddress",
