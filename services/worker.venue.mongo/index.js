@@ -8,11 +8,9 @@ const read = db.get('venue.v1', { castIds: false })
 
 conduit
   .on('venue.create.v1', async (msg) => {
-    console.log('VENUE CREATED!!!', msg)
     msg._id = msg.id
     delete msg.id
-    const dbResults = await read.insert(msg)
-    console.log('saved to venue.v1', dbResults)
+    await read.insert(msg)
     return msg
   })
   .on('venue.remove.v1', async ({ id }) => {
