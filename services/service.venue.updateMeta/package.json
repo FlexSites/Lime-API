@@ -1,5 +1,5 @@
 {
-  "name": "@nerdsauce/service.venue.updateaddress",
+  "name": "@nerdsauce/service.venue.updatemeta",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
