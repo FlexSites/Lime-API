@@ -9,3 +9,7 @@ exports.meta = ({ meta }) => {
     description: 'Undescribed venue'
   }
 }
+
+exports.status = ({ enabled }) => {
+  return enabled ? 'ACTIVE' : 'INACTIVE'
+}

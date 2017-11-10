@@ -10,6 +10,7 @@ require('@nerdsauce/event.create')
 require('@nerdsauce/event.query')
 require('@nerdsauce/venue.query')
 require('@nerdsauce/venue.create')
+require('@nerdsauce/service.venue.enable')
 
 // Gateway
 require('@nerdsauce/graphql.gateway')
