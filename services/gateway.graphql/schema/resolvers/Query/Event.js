@@ -21,3 +21,7 @@ exports.showtimes = async (source, args, context, info) => {
     }
   })
 }
+
+exports.image = ({ images }) => {
+  return images[0]
+}

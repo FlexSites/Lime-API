@@ -12,6 +12,12 @@ conduit
     delete msg.id
     return collection.insert(msg)
   })
+  .on('event.addMedia.v1', async ({ id, url }) => {
+    const event = await collection.findOne({ _id: id })
+    const media = event.media || []
+    media.push({ type: 'image', url })
+    return collection.update({ _id: id }, { $set: { media } })
+  })
   .on('event.addShowtime.v1', async ({ id, timestamp }) => {
     const event = await collection.findOne({ _id: id })
     const showtimes = event.showtimes || []
