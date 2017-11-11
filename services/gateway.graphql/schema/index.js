@@ -9,7 +9,6 @@ module.exports = async () => {
 
   if (process.env.NODE_ENV === 'mock') {
     const mocks = require('./mocks')
-    console.log('MOCK FUNCTIONS')
     addMockFunctionsToSchema({ schema, mocks, preserveResolvers: true })
   }
 

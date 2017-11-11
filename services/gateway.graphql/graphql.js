@@ -24,10 +24,10 @@ const schemaPromise = require('./schema')()
 
 const logger = (context) => next => (args, method) => {
   const random = uuid.v4()
-  console.time(`${method}-${random}`)
+  console.time(`gateway ${method}-${random}`)
   return next(args, method)
     .then(results => {
-      console.timeEnd(`${method}-${random}`)
+      console.timeEnd(`gateway ${method}-${random}`)
       return results
     })
 }
