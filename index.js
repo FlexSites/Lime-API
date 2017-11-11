@@ -15,6 +15,7 @@ require('@nerdsauce/service.venue.enable')
 require('@nerdsauce/service.venue.remove')
 require('@nerdsauce/service.venue.updateaddress')
 require('@nerdsauce/service.venue.updatemeta')
+require('@nerdsauce/service.venue.disable')
 
 // Gateway
 require('@nerdsauce/graphql.gateway')
