@@ -6,7 +6,7 @@ input AddEventShowtimeInput {
   clientMutationId: ID!
   id: ID!
   timestamp: DateTime!
-  capacity: Int!
+  capacity: Int
 }
 
 type AddEventShowtimePayload {

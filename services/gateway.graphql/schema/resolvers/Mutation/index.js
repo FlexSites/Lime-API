@@ -1,4 +1,5 @@
 const { addEventMedia } = require('./addEventMedia')
+const { addEventShowtime } = require('./addEventShowtime')
 const { createEvent } = require('./createEvent')
 const { disableEvent } = require('./disableEvent')
 const { createVenue } = require('./createVenue')
@@ -11,6 +12,7 @@ const { updateVenueMeta } = require('./updateVenueMeta')
 module.exports = {
   Mutation: {
     addEventMedia,
+    addEventShowtime,
     createEvent,
     createVenue,
     disableEvent,
