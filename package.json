@@ -21,6 +21,7 @@
     "@nerdsauce/service.event.addmedia": "file:services/service.event.addMedia",
     "@nerdsauce/service.event.addshowtime": "file:services/service.event.addShowtime",
     "@nerdsauce/service.event.disable": "file:services/service.event.disable",
+    "@nerdsauce/service.event.enable": "file:services/service.event.enable",
     "@nerdsauce/service.venue.disable": "file:services/service.venue.disable",
     "@nerdsauce/service.venue.enable": "file:services/service.venue.enable",
     "@nerdsauce/service.venue.remove": "file:services/service.venue.remove",

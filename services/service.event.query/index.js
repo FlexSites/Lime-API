@@ -13,12 +13,16 @@ const listSkus = promisify(stripe.skus.list.bind(stripe.skus))
 const collection = db.get('event.v1', { castIds: false })
 
 conduit
-  .reaction('event.query.v1', async (_, message) => {
+  .reaction('event.query.v1', async (msg, message) => {
     const permissions = get(message, [ 'user', 'permissions' ], [])
     if (!permissions.includes('read:event')) {
       return new Error('Unauthorized. Must have permission to read events')
     }
-    const { data: products } = await listProducts()
+    const query = {}
+    if (msg.id) {
+      query.ids = [ msg.id ]
+    }
+    const { data: products } = await listProducts(query)
     const promises = products.map(async ({ id, name, description, images }) => {
       const { data: showtimes } = await listSkus({ product: id })
       return {
