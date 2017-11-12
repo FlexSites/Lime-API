@@ -1,10 +1,12 @@
-# Example Service
+# Remove Event Service
 
->Description
+>Removes events
 
 ### Consumes
 
 This service consumes ...
+
+- `action.event.remove.v1`
 
 An example message:
 
@@ -15,3 +17,5 @@ An example message:
 ### Publishes
 
 This service publishes ...
+
+- `event.event.remove.v1`

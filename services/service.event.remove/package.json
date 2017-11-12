@@ -1,8 +1,8 @@
 {
-  "name": "@nerdsauce/event-remove",
+  "name": "@nerdsauce/service.event.remove",
   "version": "1.0.0",
   "description": "Remove an event",
-  "main": "worker.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index",
     "watch": "nodemon index",
@@ -12,8 +12,7 @@
   "author": "sethtippetts@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "@nerdsauce/amqp": "0.0.3",
-    "@nerdsauce/auth": "0.0.2",
+    "@nerdsauce/conduit": "0.2.2",
     "monk": "^6.0.4"
   },
   "devDependencies": {

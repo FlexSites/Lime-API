@@ -10,7 +10,4 @@ exports.createEvent = (source, { input }, { conduit }) => {
         event: results
       }
     })
-    .catch((ex) => {
-      console.error(ex)
-    })
 }
