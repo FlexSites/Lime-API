@@ -38,10 +38,10 @@ conduit
       active: false
     })
   })
-  .on('event.updateMeta.v1', async (msg) => {
-    return updateProduct(msg.id, {
-      name: msg.title,
-      description: msg.description
+  .on('event.updateMeta.v1', async ({ id, meta }) => {
+    return updateProduct(id, {
+      name: meta.title,
+      description: meta.description
     })
   })
   .on('event.removeShowtime.v1', async (msg) => {

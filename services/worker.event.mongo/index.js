@@ -40,10 +40,10 @@ conduit
   .on('event.remove.v1', async (msg) => {
     return collection.remove({ _id: msg.id })
   })
-  .on('event.updateMeta.v1', async (msg) => {
-    return collection.update({ _id: msg.id }, { $set: {
-      'meta.title': msg.meta.title,
-      'meta.description': msg.meta.description
+  .on('event.updateMeta.v1', async ({ id, meta }) => {
+    return collection.update({ _id: id }, { $set: {
+      'meta.title': meta.title,
+      'meta.description': meta.description
     } })
   })
 
