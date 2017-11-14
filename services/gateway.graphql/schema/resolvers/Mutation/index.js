@@ -1,6 +1,7 @@
 const { addEventMedia } = require('./addEventMedia')
 const { addEventShowtime } = require('./addEventShowtime')
 const { createEvent } = require('./createEvent')
+const { createOrder } = require('./createOrder')
 const { disableEvent } = require('./disableEvent')
 const { createVenue } = require('./createVenue')
 const { enableVenue } = require('./enableVenue')
@@ -18,6 +19,7 @@ module.exports = {
     addEventMedia,
     addEventShowtime,
     createEvent,
+    createOrder,
     createVenue,
     disableEvent,
     enableEvent,

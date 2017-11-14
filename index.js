@@ -4,6 +4,8 @@ require('dotenv').load()
 require('@nerdsauce/event.mongo')
 require('@nerdsauce/venue.mongo')
 require('@nerdsauce/event.stripe')
+require('@nerdsauce/worker.order.mongo')
+require('@nerdsauce/worker.order.stripe')
 
 // Services
 require('@nerdsauce/event.create')
@@ -22,6 +24,7 @@ require('@nerdsauce/service.venue.updatemeta')
 require('@nerdsauce/service.venue.disable')
 require('@nerdsauce/service.event.addshowtime')
 require('@nerdsauce/service.event.remove-showtime')
+require('@nerdsauce/service.order.create')
 
 // Gateway
 require('@nerdsauce/graphql.gateway')

@@ -22,33 +22,27 @@ query FetchShowtimes($id: ID!) {
   }
 }
 `
-const choices = ['1', '2', '3', '4', '5+']
 
-const showtimes = [{
-  timestamp: '2017-10-13T07:00',
-  date: 'Friday 13th',
-  time: '7:00pm',
-}, {
-  timestamp: '2017-10-13T07:30',
-  date: 'Friday 13th',
-  time: '7:30pm',
-}, {
-  timestamp: '2017-10-13T09:00',
-  date: 'Friday 13th',
-  time: '9:00pm',
-}, {
-  timestamp: '2017-10-14T07:00',
-  date: 'Saturday 14th',
-  time: '7:00pm',
-}, {
-  timestamp: '2017-10-14T09:00',
-  date: 'Saturday 14th',
-  time: '9:00pm',
-}, {
-  timestamp: '2017-10-14T09:30',
-  date: 'Saturday 14th',
-  time: '9:30pm',
-}]
+const createOrder = `
+mutation CreateOrder ($input: CreateOrderInput){
+  createOrder(input:$input){
+    clientMutationId
+    order {
+      id
+      tickets {
+        id
+        type
+      }
+      created
+    }
+    user {
+      id
+      name
+    }
+  }
+}
+`
+const choices = ['1', '2', '3', '4', '5+']
 
 class App extends React.Component {
   constructor (props) {
@@ -74,6 +68,54 @@ class App extends React.Component {
   }
 
   componentWillMount () {
+    const handler = window.StripeCheckout.configure({
+      key: 'pk_test_H47OVZI3S4bsjb2K5UWTuRX4',
+      locale: 'auto',
+      zipCode: true,
+      // image: image,
+      // name: title.text(),
+      token: (token) => {
+        const variables = {
+          input: {
+            clientMutationId: "1234",
+            email: "sethtippetts@gmail.com",
+            payment: {
+              source: token.id,
+              type: 'stripe'
+            },
+            items: [
+              {
+                sku: this.state.showtime.id,
+                quantity: this.state.quantity
+              }
+            ]
+          }
+        }
+        console.log('variables', variables)
+        this.setState({ token })
+
+        axios.post('http://localhost:5000/api/graphql', {
+          query: createOrder,
+          variables
+        })
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(ex => {
+          console.error(ex)
+        })
+      // You can access the token ID with `token.id`.
+      // Get the token ID to your server-side code for use.
+      },
+    })
+
+      // Close Checkout on page navigation:
+    window.addEventListener('popstate', function () {
+      handler.close()
+    })
+    this.setState({
+      stripe: handler
+    })
     axios
       .post('http://localhost:5000/api/graphql', {
         query: fetchQuery,
@@ -100,6 +142,16 @@ class App extends React.Component {
         console.warn('graphql error', ex)
       })
 
+  }
+
+  checkout () {
+    const { showtime, quantity, price } = this.state
+    console.log(this.state)
+    this.state.stripe.open({
+      panelLabel: 'Buy ' + quantity + ' ' + (quantity > 1 ? 'tickets' : 'ticket') + ' for {{amount}}',
+      description: showtime.date + ' ' + quantity + ' tickets at $' + price + '/ea',
+      amount: price * quantity,
+    })
   }
 
   render () {

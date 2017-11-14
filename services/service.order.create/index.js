@@ -1,6 +1,15 @@
-const AMQP = require('@nerdsauce/amqp')
+const Conduit = require('@nerdsauce/conduit')
 const Monk = require('monk')
 
-const { worker } = require('./worker')
+const db = new Monk(process.env.MONGODB_URL)
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'service.order.create' })
 
-worker(new Monk(process.env.MONGODB_URL), new AMQP(process.env.AMQP_URL, { name: 'order.create.service' }))
+const collection = db.get('order_source')
+
+conduit
+  .reaction('order.create.v1', async (msg, message) => {
+    await collection.insert(message)
+    return msg
+  })
+
+console.info('service.order.create listening')

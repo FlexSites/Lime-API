@@ -75,4 +75,4 @@ conduit
     return removeProduct(msg.id)
   })
 
-console.info('event.stripe.worker listening')
+console.info('worker.event.stripe listening')

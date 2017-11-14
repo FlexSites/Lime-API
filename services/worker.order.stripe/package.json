@@ -1,7 +1,7 @@
 {
-  "name": "@nerdsauce/service.order.create",
+  "name": "@nerdsauce/worker.order.stripe",
   "version": "1.0.0",
-  "description": "",
+  "description": "Worker to keep Stripe Products in-sync with our data",
   "main": "index.js",
   "scripts": {
     "start": "node index",
@@ -9,10 +9,11 @@
     "test": "eslint ."
   },
   "keywords": [],
-  "author": "sethtippetts@gmail.com",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@nerdsauce/conduit": "0.2.2",
+    "lodash.get": "^4.4.2",
     "monk": "^6.0.4"
   },
   "devDependencies": {

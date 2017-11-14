@@ -1,5 +1,5 @@
 {
-  "name": "@nerdsauce/service.order.create",
+  "name": "@nerdsauce/worker.order.mongo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "test": "eslint ."
   },
   "keywords": [],
-  "author": "sethtippetts@gmail.com",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@nerdsauce/conduit": "0.2.2",
