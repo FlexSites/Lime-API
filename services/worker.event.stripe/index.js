@@ -16,12 +16,11 @@ const delSku = promisify(stripe.skus.del.bind(stripe.skus))
 
 conduit
   .on('event.create.v1', async (msg) => {
-    const { payload } = msg.json()
     // Create the product
     return createProduct({
-      id: payload.id,
-      name: get(payload, 'meta.title', 'Untitled Event'),
-      description: get(payload, 'meta.description', 'Event Description'),
+      id: msg.id,
+      name: get(msg, 'meta.title', 'Untitled Event'),
+      description: get(msg, 'meta.description', 'Event Description'),
       // These are the characteristics of the product that SKUs provide values for
       attributes: ['timestamp'],
       active: false,

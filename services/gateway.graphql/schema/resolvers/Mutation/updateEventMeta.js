@@ -1,5 +1,8 @@
+const { fromGlobalId } = require('graphql-relay')
+
 exports.updateEventMeta = (source, { input }, { conduit }) => {
   const { clientMutationId, meta } = input
+  input.id = fromGlobalId(input.id).id
   return conduit
     .action('event.updateMeta.v1', input)
     .then(results => {
