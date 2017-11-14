@@ -21,5 +21,5 @@ conduit
     return msg
   })
 
-console.log('service.event.remove listening')
+console.info('service.event.remove listening')
 

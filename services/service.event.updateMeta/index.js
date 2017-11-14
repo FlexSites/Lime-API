@@ -9,7 +9,6 @@ const collection = db.get('event_source')
 conduit
   .reaction('event.updateMeta.v1', async (msg, message) => {
     // const viewer = await toViewer(msg.properties.headers.authorization)
-    // console.log(viewer)
     // TODO: AuthZ
     // TODO: Validation
     await collection.insert(message)

@@ -9,7 +9,6 @@ const collection = db.get('event_source')
 conduit
   .reaction('event.addMedia.v1', async (msg, message) => {
     // TODO: ACL
-    console.log('service.event.addmedia', msg)
     await collection.insert(message)
     return msg
   })
