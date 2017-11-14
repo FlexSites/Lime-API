@@ -18,7 +18,9 @@ conduit
     if (!permissions.includes('read:event')) {
       return new Error('Unauthorized. Must have permission to read events')
     }
-    const query = {}
+    const query = {
+      active: true
+    }
     if (msg.id) {
       query.ids = [ msg.id ]
     }
