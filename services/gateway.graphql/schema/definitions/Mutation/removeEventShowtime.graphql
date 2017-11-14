@@ -5,10 +5,11 @@ extend type Mutation {
 input RemoveEventShowtimeInput {
   clientMutationId: ID!
   id: ID!
+  showtime: ID!
 }
 
 type RemoveEventShowtimePayload {
   clientMutationId: ID!
   showtime: Showtime
-  event: Showtime
+  event: Event
 }

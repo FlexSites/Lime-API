@@ -37,7 +37,7 @@ conduit
         },
         showtimes: showtimes.map((showtime) => {
           return {
-            id,
+            id: showtime.id,
             timestamp: showtime.attributes.timestamp,
             remaining: showtime.inventory.quantity
           }

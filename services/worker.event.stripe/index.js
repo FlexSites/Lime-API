@@ -45,7 +45,7 @@ conduit
     })
   })
   .on('event.removeShowtime.v1', async (msg) => {
-    return delSku(msg.id)
+    return delSku(msg.showtime)
   })
   .on('event.addMedia.v1', async (msg) => {
     return updateProduct(msg.id, {

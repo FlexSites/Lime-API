@@ -21,6 +21,7 @@ require('@nerdsauce/service.venue.updateaddress')
 require('@nerdsauce/service.venue.updatemeta')
 require('@nerdsauce/service.venue.disable')
 require('@nerdsauce/service.event.addshowtime')
+require('@nerdsauce/service.event.remove-showtime')
 
 // Gateway
 require('@nerdsauce/graphql.gateway')

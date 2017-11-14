@@ -10,6 +10,7 @@ const { removeVenue } = require('./removeVenue')
 const { removeEvent } = require('./removeEvent')
 const { updateEventMeta } = require('./updateEventMeta')
 const { updateVenueAddress } = require('./updateVenueAddress')
+const { removeEventShowtime } = require('./removeEventShowtime')
 const { updateVenueMeta } = require('./updateVenueMeta')
 
 module.exports = {
@@ -24,6 +25,7 @@ module.exports = {
     disableVenue,
     removeVenue,
     removeEvent,
+    removeEventShowtime,
     updateEventMeta,
     updateVenueAddress,
     updateVenueMeta
