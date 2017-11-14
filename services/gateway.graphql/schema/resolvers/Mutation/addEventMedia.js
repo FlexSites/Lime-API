@@ -1,5 +1,8 @@
+const { fromGlobalId } = require('graphql-relay')
+
 exports.addEventMedia = (source, { input }, { conduit }) => {
   const { clientMutationId } = input
+  input.id = fromGlobalId(input.id).id
   return conduit
     .action('event.addMedia.v1', input)
     .then(results => {
