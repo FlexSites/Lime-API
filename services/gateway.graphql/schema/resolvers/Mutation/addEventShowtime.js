@@ -1,8 +1,9 @@
 const uuid = require('uuid')
+const { fromGlobalId } = require('graphql-relay')
 
 exports.addEventShowtime = (source, { input }, { conduit }) => {
   const { clientMutationId } = input
-  input.event = input.id
+  input.event = fromGlobalId(input.id).id
   input.id = uuid.v4()
   return conduit
     .action('event.addShowtime.v1', input)
