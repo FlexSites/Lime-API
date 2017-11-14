@@ -6,14 +6,16 @@ const {
 
 const events = require('./events')
 const venues = require('./venues')
-const Node = require('./Node')
+const Node = require('./NodeType')
+const { node } = require('./node')
 const Event = require('./Event')
 const Venue = require('./Venue')
 
 module.exports = {
   Query: {
     events,
-    venues
+    venues,
+    node
   },
   Node,
   Event,

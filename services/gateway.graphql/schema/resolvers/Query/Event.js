@@ -1,5 +1,4 @@
-
+const { toGlobalId } = require('graphql-relay')
 exports.id = ({ id, _id }) => {
-  return _id || id
+  return toGlobalId('Event', _id || id)
 }
-
