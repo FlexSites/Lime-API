@@ -6,7 +6,7 @@ const get = require('lodash.get')
 
 const stripe = new Stripe(process.env.STRIPE_TOKEN)
 const db = new Monk(process.env.MONGODB_URL)
-const conduit = new Conduit(process.env.AMQP_URL, { name: 'event.stripe.worker' })
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'worker.event.stripe' })
 
 const createProduct = promisify(stripe.products.create.bind(stripe.products))
 const updateProduct = promisify(stripe.products.update.bind(stripe.products))
@@ -74,5 +74,3 @@ conduit
   .on('event.remove.v1', async (msg) => {
     return removeProduct(msg.id)
   })
-
-console.info('worker.event.stripe listening')
