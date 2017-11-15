@@ -33,7 +33,7 @@
     "@nerdsauce/service.venue.updatemeta": "file:services/service.venue.updateMeta",
     "@nerdsauce/venue.create": "file:services/service.venue.create",
     "@nerdsauce/worker.venue.mongo": "file:services/worker.venue.mongo",
-    "@nerdsauce/venue.query": "file:services/service.venue.query",
+    "@nerdsauce/service.venue.query": "file:services/service.venue.query",
     "@nerdsauce/worker.order.mongo": "file:services/worker.order.mongo",
     "@nerdsauce/worker.order.stripe": "file:services/worker.order.stripe",
     "dotenv": "^4.0.0",

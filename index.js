@@ -10,7 +10,7 @@ require('@nerdsauce/worker.order.stripe')
 // Services
 require('@nerdsauce/service.event.create')
 require('@nerdsauce/service.event.query')
-require('@nerdsauce/venue.query')
+require('@nerdsauce/service.venue.query')
 require('@nerdsauce/venue.create')
 require('@nerdsauce/service.event.addmedia')
 require('@nerdsauce/service.event.updatemeta')

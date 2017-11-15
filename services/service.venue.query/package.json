@@ -1,8 +1,8 @@
 {
-  "name": "@nerdsauce/venue.query",
+  "name": "@nerdsauce/service.venue.query",
   "version": "1.0.0",
   "description": "",
-  "main": "worker.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index",
     "watch": "nodemon index",
