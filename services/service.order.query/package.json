@@ -12,7 +12,7 @@
   "author": "sethtippetts@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "@nerdsauce/conduit": "0.2.2",
+    "@nerdsauce/conduit": "0.3.0",
     "monk": "^6.0.4"
   },
   "devDependencies": {

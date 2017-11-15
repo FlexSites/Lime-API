@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nerdsauce/conduit": "0.2.2",
+    "@nerdsauce/conduit": "0.3.0",
     "lodash.get": "^4.4.2",
     "monk": "^6.0.4",
     "stripe": "^5.3.0"
