@@ -28,5 +28,3 @@ conduit
   .on('venue.disable.v1', async ({ id }) => {
     return read.update({ _id: id }, { $set: { enabled: false } })
   })
-
-console.info('worker.venue.mongo listening')

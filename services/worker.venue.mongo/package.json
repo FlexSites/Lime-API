@@ -1,5 +1,5 @@
 {
-  "name": "@nerdsauce/venue.mongo",
+  "name": "@nerdsauce/worker.venue.mongo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
