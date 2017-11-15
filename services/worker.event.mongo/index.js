@@ -2,7 +2,7 @@ const Conduit = require('@nerdsauce/conduit')
 const Monk = require('monk')
 
 const db = new Monk(process.env.MONGODB_URL)
-const conduit = new Conduit(process.env.AMQP_URL, { name: 'event.mongo.worker' })
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'worker.event.mongo' })
 
 const collection = db.get('event.v1', { castIds: false })
 
@@ -49,5 +49,3 @@ conduit
       'meta.description': meta.description
     } })
   })
-
-console.info('worker.event.mongo listening')

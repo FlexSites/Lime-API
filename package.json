@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@nerdsauce/event.create": "file:./services/service.event.create",
-    "@nerdsauce/event.mongo": "file:services/worker.event.mongo",
+    "@nerdsauce/worker.event.mongo": "file:services/worker.event.mongo",
     "@nerdsauce/event.query": "file:./services/service.event.query",
     "@nerdsauce/event.stripe": "file:services/worker.event.stripe",
     "@nerdsauce/graphql.gateway": "file:services/gateway.graphql",
