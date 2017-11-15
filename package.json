@@ -31,7 +31,7 @@
     "@nerdsauce/service.venue.remove": "file:services/service.venue.remove",
     "@nerdsauce/service.venue.updateaddress": "file:services/service.venue.updateAddress",
     "@nerdsauce/service.venue.updatemeta": "file:services/service.venue.updateMeta",
-    "@nerdsauce/venue.create": "file:services/service.venue.create",
+    "@nerdsauce/service.venue.create": "file:services/service.venue.create",
     "@nerdsauce/worker.venue.mongo": "file:services/worker.venue.mongo",
     "@nerdsauce/service.venue.query": "file:services/service.venue.query",
     "@nerdsauce/worker.order.mongo": "file:services/worker.order.mongo",

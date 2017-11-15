@@ -3,10 +3,9 @@ const Monk = require('monk')
 const get = require('lodash.get')
 
 const db = new Monk(process.env.MONGODB_URL)
-const conduit = new Conduit(process.env.AMQP_URL, { name: 'venue.create.service' })
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'service.venue.create' })
 
 const write = db.get('venue_source')
-
 
 conduit
   .reaction('venue.create.v1', async (msg, message) => {
@@ -18,5 +17,3 @@ conduit
 
     return msg
   })
-
-console.info('venue.create.service listening')
