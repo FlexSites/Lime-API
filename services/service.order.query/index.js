@@ -20,20 +20,19 @@ conduit
     return orders
       .map(({ amount, id, items, created, email, status }) => {
         const tickets = [].concat(
-          ...order
-            .items
+          ...items
             .filter(({ type }) => type === 'sku')
             .map(item => {
               return new Array(item.quantity).fill({
-                id: order.id,
-                order_id: order.id,
+                id: id,
+                order_id: id,
                 type: 'GA'
               })
             })
         )
         return {
-          id: order.id,
-          created: order.created,
+          id: id,
+          created: created,
           amount,
           status,
           user: { email },

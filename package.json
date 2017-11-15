@@ -24,6 +24,7 @@
     "@nerdsauce/service.event.remove-showtime": "file:services/service.event.removeShowtime",
     "@nerdsauce/service.event.updatemeta": "file:services/service.event.updateMeta",
     "@nerdsauce/service.order.create": "file:services/service.order.create",
+    "@nerdsauce/service.order.query": "file:services/service.order.query",
     "@nerdsauce/service.venue.create": "file:services/service.venue.create",
     "@nerdsauce/service.venue.disable": "file:services/service.venue.disable",
     "@nerdsauce/service.venue.enable": "file:services/service.venue.enable",

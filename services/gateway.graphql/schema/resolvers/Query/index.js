@@ -4,6 +4,7 @@ const {
   GraphQLDateTime
 } = require('graphql-custom-types')
 
+const orders = require('./orders')
 const events = require('./events')
 const venues = require('./venues')
 const Node = require('./NodeType')
@@ -14,6 +15,7 @@ const Venue = require('./Venue')
 module.exports = {
   Query: {
     events,
+    orders,
     venues,
     node
   },
