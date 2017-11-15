@@ -1,8 +1,8 @@
 {
-  "name": "@nerdsauce/order-service",
+  "name": "@nerdsauce/service.order.query",
   "version": "1.0.0",
   "description": "",
-  "main": "worker.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index",
     "watch": "nodemon index",
@@ -12,8 +12,8 @@
   "author": "sethtippetts@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "@nerdsauce/conduit": "0.3.0",
-    "monk": "^6.0.4"
+    "@nerdsauce/conduit": "0.3.1",
+    "stripe": "^5.3.0"
   },
   "devDependencies": {
     "eslint": "^4.8.0",
