@@ -8,7 +8,7 @@ require('@nerdsauce/worker.order.mongo')
 require('@nerdsauce/worker.order.stripe')
 
 // Services
-require('@nerdsauce/event.create')
+require('@nerdsauce/service.event.create')
 require('@nerdsauce/event.query')
 require('@nerdsauce/venue.query')
 require('@nerdsauce/venue.create')

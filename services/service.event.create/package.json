@@ -1,5 +1,5 @@
 {
-  "name": "@nerdsauce/event.create",
+  "name": "@nerdsauce/service.event.create",
   "version": "1.0.0",
   "description": "Create a new event",
   "main": "index.js",

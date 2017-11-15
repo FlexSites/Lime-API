@@ -3,7 +3,7 @@ const Monk = require('monk')
 const get = require('lodash.get')
 
 const db = new Monk(process.env.MONGODB_URL)
-const conduit = new Conduit(process.env.AMQP_URL, { name: 'event.create' })
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'service.event.create' })
 
 const collection = db.get('event_source')
 
@@ -16,5 +16,3 @@ conduit
     await collection.insert(message)
     return msg
   })
-
-console.info('event.create listening')
