@@ -1,26 +1,19 @@
 const express = require('express')
 const cors = require('cors')
-const uuid = require('uuid')
 const graphqlExpress = require('express-graphql')
 const Conduit = require('@nerdsauce/conduit')
+const { debug, profile } = require('@nerdsauce/conduit/middleware/profile')
 
 const auth = require('./auth')
 
 const schemaPromise = require('./schema')()
 
-const logger = (context) => next => (args, method) => {
-  const random = uuid.v4()
-  console.time(`gateway ${method}-${random}`)
-  return next(args, method)
-    .then(results => {
-      console.timeEnd(`gateway ${method}-${random}`)
-      return results
-    })
-}
-
 const conduit = new Conduit(process.env.AMQP_URL, { name: 'graphql.service' })
-  .middleware(logger)
 
+if (process.env.NODE_ENV === 'debug') {
+  conduit.middleware(debug)
+  conduit.middleware(profile)
+}
 const app = express()
 
 app.use(cors())
