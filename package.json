@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "dependencies": {
     "@nerdsauce/gateway.graphql": "file:services/gateway.graphql",
     "@nerdsauce/service.event.addmedia": "file:services/service.event.addMedia",

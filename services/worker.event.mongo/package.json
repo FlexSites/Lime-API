@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "dependencies": {
     "@nerdsauce/conduit": "0.3.2",
     "monk": "^6.0.4"

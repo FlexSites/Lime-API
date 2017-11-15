@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "sethtippetts@gmail.com",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "dependencies": {
     "@nerdsauce/conduit": "0.3.2",
     "lodash.get": "^4.4.2",
