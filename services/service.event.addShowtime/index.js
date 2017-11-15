@@ -14,5 +14,3 @@ conduit
     await collection.insert(message)
     return msg
   })
-
-console.info('service.event.addShowtime listening')

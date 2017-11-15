@@ -22,5 +22,3 @@ conduit
     delete msg.id
     return collection.insert(msg)
   })
-
-console.info('worker.order.mongo listening')

@@ -18,6 +18,3 @@ conduit
     await collection.insert(message)
     return msg
   })
-
-console.info('service.event.enable listening')
-

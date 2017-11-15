@@ -20,5 +20,4 @@ exports.worker = async (db, amqp) => {
       const { payload } = data
       return read.update({ _id: data.id }, { $set: { stripe_id: payload.stripe_id } })
     })
-  console.info('order.create.service listening')
 }

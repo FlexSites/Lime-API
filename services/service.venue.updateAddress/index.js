@@ -16,5 +16,3 @@ conduit
     await write.insert(message)
     return msg
   })
-
-console.info('service.venue.updateAddress listening')

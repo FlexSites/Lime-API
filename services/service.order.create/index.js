@@ -11,5 +11,3 @@ conduit
     await collection.insert(message)
     return msg
   })
-
-console.info('service.order.create listening')

@@ -20,5 +20,3 @@ conduit
     // Alert interested parties about changes
     return msg
   })
-
-console.info('service.event.disable listening')

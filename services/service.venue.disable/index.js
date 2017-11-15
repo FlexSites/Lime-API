@@ -11,5 +11,3 @@ conduit
     await write.insert(message)
     return { id: message.aggregate }
   })
-
-console.info('service.venue.disable listening')

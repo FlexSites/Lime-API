@@ -34,5 +34,3 @@ conduit
     await msg.emit('stripe.paid.v1', results)
     return results
   })
-
-console.info('worker.order.stripe listening')
