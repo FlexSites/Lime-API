@@ -2,13 +2,13 @@ const express = require('express')
 const cors = require('cors')
 const graphqlExpress = require('express-graphql')
 const Conduit = require('@nerdsauce/conduit')
-const { debug, profile } = require('@nerdsauce/conduit/middleware/profile')
+const { debug, profile } = require('@nerdsauce/conduit/middleware/debug')
 
 const auth = require('./auth')
 
 const schemaPromise = require('./schema')()
 
-const conduit = new Conduit(process.env.AMQP_URL, { name: 'graphql.service' })
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'gateway.graphql' })
 
 if (process.env.NODE_ENV === 'debug') {
   conduit.middleware(debug)
