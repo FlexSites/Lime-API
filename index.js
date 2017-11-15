@@ -27,4 +27,4 @@ require('@nerdsauce/service.event.remove-showtime')
 require('@nerdsauce/service.order.create')
 
 // Gateway
-require('@nerdsauce/graphql.gateway')
+require('@nerdsauce/gateway.graphql')

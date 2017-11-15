@@ -17,7 +17,7 @@
     "@nerdsauce/worker.event.mongo": "file:services/worker.event.mongo",
     "@nerdsauce/service.event.query": "file:./services/service.event.query",
     "@nerdsauce/worker.event.stripe": "file:services/worker.event.stripe",
-    "@nerdsauce/graphql.gateway": "file:services/gateway.graphql",
+    "@nerdsauce/gateway.graphql": "file:services/gateway.graphql",
     "@nerdsauce/service.event.addmedia": "file:services/service.event.addMedia",
     "@nerdsauce/service.event.addshowtime": "file:services/service.event.addShowtime",
     "@nerdsauce/service.event.disable": "file:services/service.event.disable",
