@@ -6,7 +6,7 @@ const Stripe = require('stripe')
 
 const stripe = new Stripe(process.env.STRIPE_TOKEN)
 const db = new Monk(process.env.MONGODB_URL)
-const conduit = new Conduit(process.env.AMQP_URL, { name: 'event.query.service' })
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'service.event.query' })
 
 const listProducts = promisify(stripe.products.list.bind(stripe.products))
 const listSkus = promisify(stripe.skus.list.bind(stripe.skus))
@@ -48,5 +48,3 @@ conduit
     })
     return Promise.all(promises)
   })
-
-console.info('event.query listening')

@@ -1,5 +1,5 @@
 {
-  "name": "@nerdsauce/event.query",
+  "name": "@nerdsauce/service.event.query",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
