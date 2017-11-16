@@ -1,0 +1,396 @@
+input AddEventMediaInput {
+  clientMutationId: ID!
+  id: ID!
+  url: URL!
+  type: String
+}
+
+type AddEventMediaPayload {
+  clientMutationId: ID!
+  event: Event!
+}
+
+input AddEventShowtimeInput {
+  clientMutationId: ID!
+  id: ID!
+  timestamp: DateTime!
+  capacity: Int
+}
+
+type AddEventShowtimePayload {
+  clientMutationId: ID!
+  showtime: Showtime!
+  event: Event!
+}
+
+# Everyone
+type Address {
+  address1: String!
+  address2: String
+  address3: String
+  locality: String!
+  postalCode: String!
+  region: String!
+  timezone: String!
+  latitude: Float
+  longitude: Float
+}
+
+input AddressInput {
+  address1: String!
+  address2: String
+  address3: String
+  locality: String!
+  postalCode: String!
+  region: String!
+  timezone: String
+  latitude: Float
+  longitude: Float
+}
+
+interface Connection {
+  edges: [Edge!]!
+  pageInfo: PageInfo!
+}
+
+input CreateEventInput {
+  clientMutationId: ID!
+  link: URL
+  meta: MetaInput
+  venue_id: ID!
+}
+
+type CreateEventPayload {
+  clientMutationId: ID!
+  event: Event!
+}
+
+input CreateOrderInput {
+  clientMutationId: ID!
+  payment: PaymentInput
+  items: [OrderItemInput!]
+  email: Email
+}
+
+type CreateOrderPayload {
+  clientMutationId: ID!
+  user: User
+  order: Order
+}
+
+input CreateVenueInput {
+  clientMutationId: ID!
+  capacity: Int
+  address: AddressInput!
+  meta: MetaInput
+}
+
+type CreateVenuePayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+
+# The DateTime scalar type represents date time strings complying to ISO-8601.
+scalar DateTime
+
+input DisableEventInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type DisableEventPayload {
+  clientMutationId: ID!
+  event: Event!
+}
+
+input DisableVenueInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type DisableVenuePayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+
+interface Edge {
+  cursor: String!
+  node: Node!
+}
+
+# The Email scalar type represents E-Mail addresses compliant to RFC 822.
+scalar Email
+
+input EnableEventInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type EnableEventPayload {
+  clientMutationId: ID!
+  event: Event!
+}
+
+input EnableVenueInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type EnableVenuePayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+
+type Event implements Node, Page {
+  id: ID!
+  meta: Meta!
+  rating: RATING
+  range: EventRange
+  link: URL!
+  video: URL
+  image: URL
+  venue: Venue
+  showtimes: [Showtime!]
+}
+
+type EventConnection implements Connection {
+  edges: [EventEdge!]!
+  pageInfo: PageInfo!
+}
+
+# Pagination
+type EventEdge implements Edge {
+  cursor: String!
+  node: Event!
+}
+
+type EventRange {
+  start: DateTime
+  end: DateTime
+}
+
+type Meta {
+  title: String!
+  description: String
+  image: URL
+}
+
+input MetaInput {
+  title: String!
+  description: String
+  image: URL
+}
+
+type Mutation {
+  recordMetric(input: RecordMetricInput): RecordMetricPayload
+  addEventMedia(input: AddEventMediaInput): AddEventMediaPayload
+  addEventShowtime(input: AddEventShowtimeInput): AddEventShowtimePayload
+  createEvent(input: CreateEventInput): CreateEventPayload
+  createOrder(input: CreateOrderInput): CreateOrderPayload
+  createVenue(input: CreateVenueInput): CreateVenuePayload
+  disableEvent(input: DisableEventInput): DisableEventPayload
+  disableVenue(input: DisableVenueInput): DisableVenuePayload
+  enableEvent(input: EnableEventInput): EnableEventPayload
+  enableVenue(input: EnableVenueInput): EnableVenuePayload
+  removeEvent(input: RemoveEventInput): RemoveEventPayload
+  removeEventShowtime(input: RemoveEventShowtimeInput): RemoveEventShowtimePayload
+  removeVenue(input: RemoveVenueInput): RemoveVenuePayload
+  updateEventMeta(input: UpdateEventMetaInput): UpdateEventMetaPayload
+  updateVenueAddress(input: UpdateVenueAddressInput): UpdateVenueAddressPayload
+  updateVenueCapacity(input: UpdateVenueCapacityInput): UpdateVenueCapacityPayload
+  updateVenueMeta(input: UpdateVenueMetaInput): UpdateVenueMetaPayload
+}
+
+interface Node {
+  id: ID!
+}
+
+type Order implements Node {
+  id: ID!
+  user: User
+  created: DateTime
+  tickets: [Ticket]
+}
+
+type OrderConnection implements Connection {
+  edges: [OrderEdge!]!
+  pageInfo: PageInfo!
+}
+
+# Pagination
+type OrderEdge implements Edge {
+  cursor: String!
+  node: Order!
+}
+
+input OrderItemInput {
+  sku: ID!
+  quantity: Int!
+}
+
+interface Page {
+  meta: Meta!
+}
+
+type PageInfo {
+  startCursor: String!
+  endCursor: String!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+}
+
+input PaymentInput {
+  type: String!
+  source: String!
+}
+
+type Query {
+  node(id: ID!): Node!
+  events: EventConnection
+  orders: OrderConnection!
+  venues: VenueConnection
+}
+
+# Enumerables
+enum RATING {
+  G
+  PG
+  PG13
+}
+
+input RecordMetricInput {
+  clientMutationId: ID!
+  key: String
+  value: String
+}
+
+type RecordMetricPayload {
+  clientMutationId: ID!
+  key: String
+  value: Float
+}
+
+input RemoveEventInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type RemoveEventPayload {
+  clientMutationId: ID!
+  event: Event!
+}
+
+input RemoveEventShowtimeInput {
+  clientMutationId: ID!
+  id: ID!
+  showtime: ID!
+}
+
+type RemoveEventShowtimePayload {
+  clientMutationId: ID!
+  showtime: Showtime
+  event: Event
+}
+
+input RemoveVenueInput {
+  clientMutationId: ID!
+  id: ID!
+}
+
+type RemoveVenuePayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+
+type Showtime implements Node {
+  id: ID!
+  timestamp: DateTime
+  remaining: Int!
+  tickets(type: String): [Ticket]
+}
+
+enum STATUS {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+type Ticket implements Node {
+  id: ID!
+  order: Order
+  type: String
+}
+
+input UpdateEventMetaInput {
+  clientMutationId: ID!
+  id: ID!
+  meta: MetaInput!
+}
+
+type UpdateEventMetaPayload {
+  clientMutationId: ID!
+  event: Event!
+}
+
+input UpdateVenueAddressInput {
+  clientMutationId: ID!
+  id: ID!
+  address: AddressInput!
+}
+
+type UpdateVenueAddressPayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+
+input UpdateVenueCapacityInput {
+  clientMutationId: ID!
+  id: ID!
+  capacity: Int!
+}
+
+type UpdateVenueCapacityPayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+
+input UpdateVenueMetaInput {
+  clientMutationId: ID!
+  id: ID!
+  meta: MetaInput!
+}
+
+type UpdateVenueMetaPayload {
+  clientMutationId: ID!
+  venue: Venue!
+}
+
+# The URL scalar type represents URL addresses.
+scalar URL
+
+# Only customer and staff
+type User implements Node {
+  id: ID!
+  name: String!
+}
+
+# Everyone
+type Venue implements Node {
+  id: ID!
+  meta: Meta!
+  address: Address!
+  capacity: Int!
+  status: STATUS
+  events: [Event]
+}
+
+type VenueConnection implements Connection {
+  edges: [VenueEdge!]!
+  pageInfo: PageInfo!
+}
+
+# Pagination
+type VenueEdge implements Edge {
+  cursor: String!
+  node: Venue!
+}
