@@ -1,0 +1,9 @@
+Version | Change
+1.0.0   | Release to production
+1.1.0   | Add new feature
+1.1.1   | Fix bug with new feature
+1.1.2   | Minor problem with database connection
+1.2.0   | Next feature
+2.0.0   | Change output field `a` to `b`
+2.0.1   | Was missing validation on field Change
+3.0.0   | Change required input variables
