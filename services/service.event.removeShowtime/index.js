@@ -4,7 +4,6 @@ const Monk = require('monk')
 const db = new Monk(process.env.MONGODB_URL)
 const conduit = new Conduit(process.env.AMQP_URL, { name: 'service.event.removeShowtime' })
 
-
 const collection = db.get('event_source')
 
 conduit

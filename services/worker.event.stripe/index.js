@@ -1,11 +1,9 @@
 const Conduit = require('@nerdsauce/conduit')
-const Monk = require('monk')
 const { promisify } = require('util')
 const Stripe = require('stripe')
 const get = require('lodash.get')
 
 const stripe = new Stripe(process.env.STRIPE_TOKEN)
-const db = new Monk(process.env.MONGODB_URL)
 const conduit = new Conduit(process.env.AMQP_URL, { name: 'worker.event.stripe' })
 
 const createProduct = promisify(stripe.products.create.bind(stripe.products))

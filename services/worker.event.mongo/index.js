@@ -27,7 +27,7 @@ conduit
   .on('event.removeShowtime.v1', async (msg) => {
     const event = await collection.findOne({ _id: msg.id })
     if (!event) {
-      return new Error(`Event with ID "${ msg.id }" not found.`)
+      return new Error(`Event with ID "${msg.id}" not found.`)
     }
     const showtimes = (event.showtimes || []).filter((showtime) => {
       return showtime.timestamp !== msg.timestamp

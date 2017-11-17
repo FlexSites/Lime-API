@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "eslint .",
     "start": "node index.js",
     "watch": "nodemon index.js"
   },
@@ -32,7 +32,7 @@
     "graphql-custom-types": "^1.1.0",
     "graphql-playground-middleware": "^1.1.0",
     "graphql-relay": "^0.5.2",
-    "graphql-tools": "^1.2.3",
+    "graphql-tools": "^2.7.2",
     "lodash.get": "^4.4.2"
   }
 }

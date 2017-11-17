@@ -7,7 +7,6 @@ const conduit = new Conduit(process.env.AMQP_URL, { name: 'service.venue.updateM
 
 const write = db.get('venue_source')
 
-
 conduit
   .reaction('venue.updateMeta.v1', async (msg, message) => {
     const permissions = get(message, [ 'user', 'permissions' ], [])

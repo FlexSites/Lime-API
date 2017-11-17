@@ -3,7 +3,7 @@ const Monk = require('monk')
 const get = require('lodash.get')
 
 const db = new Monk(process.env.MONGODB_URL)
-const conduit = new Conduit(process.env.AMQP_URL, { name: 'service.venue.updateAddress '})
+const conduit = new Conduit(process.env.AMQP_URL, { name: 'service.venue.updateAddress' })
 
 const write = db.get('venue_source')
 

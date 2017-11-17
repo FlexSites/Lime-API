@@ -31,13 +31,12 @@ conduit
             })
         )
         return {
-          id: id,
+          amount,
           created: created,
-          amount,
+          id: id,
           status,
-          user: { email },
-          amount,
-          tickets
+          tickets,
+          user: { email }
         }
       })
   })
